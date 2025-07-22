@@ -1,30 +1,31 @@
-     #include <fcntl.h>
-       #include <unistd.h>
-#include <stdio.h>
-int main(int argc , char* argv [])
-{
-        char buffer[1024];
+       #include <stdio.h>
+ #include <string.h>
 
-int fi = open(argv[1],O_RDONLY);
-ssize_t r;
-if( fi<0)
-{
-    printf("error");
-    return 1;
-}
-int si = open(argv[2],O_RDWR|O_CREAT| O_TRUNC,0644);
-if( si<0)
-{
-    printf("error");
-    return 1;
-}
-while(  (r = read(fi,buffer,sizeof(buffer)))>0)
-{
-int  w=write(si,buffer,r);
-}
-close(si);
-remove(argv[1]);
-return 0;
-}
+int main(int argc , char* argv[]){
+char line[255];
+int f=0;
+	while(!f)
+	{
+           fgets(line,sizeof(line),stdin);
+	   char *token= strtok(line," ");
+	   while(token != NULL ){
+           
+		   if(token=="exit")
+		   {
+			   f=1;
+		       printf("%s","Good Bye :)");
+                      break;
+		   }
+		   else if(token!="echo")
+                      {
+                      printf("%s","Invalid command");
+                      break;
+                      } 
+		   else 
+		   {
+			   printf("%s",token);
+		   }
 
-
+	   }
+	}
+}
