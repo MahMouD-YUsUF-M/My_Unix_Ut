@@ -100,7 +100,6 @@ git checkout -b my-awesome-feature
 Made with ❤️ for the SPL01 community and systems programming learners worldwide
 📚 Course: System Programming in Linux (SPL01) 
 ⬆️ Back to Top
-</div># My_Unix_Ut 🐚
 
 </div># My_Unix_Ut 🐚
 
