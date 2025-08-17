@@ -1088,72 +1088,15 @@ feat: add pipe support to microshell
 Closes #123
 ```
 
-#### **Pull Request Checklist**
-- [ ] Code compiles without warnings
-- [ ] All tests pass (`make test`)
-- [ ] No memory leaks detected (valgrind clean)
-- [ ] Documentation updated
-- [ ] Commit messages follow format
-- [ ] PR description explains changes clearly
 
-### 🏆 Recognition
 
-#### **Hall of Fame** 🌟
-Contributors will be recognized in:
-- README acknowledgments
-- `CONTRIBUTORS.md` file
-- Release notes
-- Project documentation
 
-#### **Contribution Levels**
-- **🥉 Bronze**: Documentation, bug fixes, small features
-- **🥈 Silver**: Major features, performance improvements
-- **🥇 Gold**: Architecture improvements, major refactoring
 
-### 📞 Getting Help
 
-#### **Discussion Channels**
-- **GitHub Issues**: Bug reports and feature requests
-- **GitHub Discussions**: General questions and ideas
-- **Code Review**: Pull request discussions
 
-#### **Mentorship Program**
-New contributors can request mentorship for:
-- Understanding the codebase
-- Learning systems programming concepts
-- Implementing specific features
-- Code review and best practices
 
-### 🛡️ Code of Conduct
 
-We are committed to providing a welcoming and inclusive environment:
 
-- **Be respectful** in all interactions
-- **Be constructive** when providing feedback  
-- **Be patient** with newcomers and questions
-- **Be collaborative** in problem-solving
-
-Report any concerns to the maintainers via email or GitHub issues.
-
----
-
-**Ready to contribute?** Check out our [Good First Issues](https://github.com/yourusername/My_Unix_Ut/labels/good%20first%20issue) to get started! 🚀
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 📞 Contact
-
-- **GitHub**: [@yourusername](https://github.com/yourusername)
-- **Email**: your.email@example.com
-
-## 🙏 Acknowledgments
-
-- Unix/Linux documentation and specifications
-- Advanced Programming in the UNIX Environment by W. Richard Stevens
-- The C Programming Language by Kernighan and Ritchie
-- Open source community contributions
 
 ---
 
