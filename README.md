@@ -97,10 +97,10 @@ git checkout -b my-awesome-feature
 ---
 
 <div align="center">
-
-**Made with ❤️ by the systems programming community**
-
-[⬆️ Back to Top](#my_unix_ut-)
+Made with ❤️ for the SPL01 community and systems programming learners worldwide
+📚 Course: System Programming in Linux (SPL01) 
+⬆️ Back to Top
+</div># My_Unix_Ut 🐚
 
 </div># My_Unix_Ut 🐚
 
