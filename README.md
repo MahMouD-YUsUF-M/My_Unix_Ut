@@ -1,109 +1,3 @@
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-```
-MIT License
-
-Copyright (c) 2024 My_Unix_Ut Contributors
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
-#### **Technical Achievement**
-- **Code Quality**: 95%+ test coverage, zero memory leaks
-- **Performance**: Competitive performance with standard Unix utilities
-- **Compatibility**: Tested on 5+ Unix-like operating systems
-
-
-
-### 📊 Project Statistics
-
-```
-Lines of Code: 2,500+
-Test Cases: 150+
-Documentation Pages: 25+
-Supported Platforms: Linux, macOS, FreeBSD, OpenBSD
-Programming Languages: C (95%), Shell Scripts (5%)
-```
-
-### 🔮 Future Roadmap
-
-#### **Version 2.0** (Q2 2024)
-- [ ] Pipe support (`|`)
-- [ ] Background processes (`&`)
-- [ ] Command history with arrow keys
-- [ ] Tab completion
-- [ ] Configuration files
-
-#### **Version 3.0** (Q4 2024)
-- [ ] Job control (`fg`, `bg`, `jobs`)
-- [ ] Shell scripting support
-- [ ] Alias system
-- [ ] Custom prompt configuration
-- [ ] Plugin architecture
-
-#### **Long-term Vision**
-- Full POSIX shell compliance
-- Cross-platform compatibility (Windows WSL)
-- Interactive debugging features
-- Performance optimization
-- Educational curriculum integration
-
----
-
-## 🚀 Quick Start Summary
-
-```bash
-# 1. Clone and setup
-git clone https://github.com/yourusername/My_Unix_Ut.git
-cd My_Unix_Ut
-chmod +x setup.sh && ./setup.sh
-
-# 2. Test everything works
-make test
-
-# 3. Try the shells
-./femtoshell    # Basic shell
-./picoshell     # Process management
-./nanoshell     # Variable expansion  
-./microshell    # Full features
-
-# 4. Explore utilities
-./mypwd && ./mycat README.md
-
-# 5. Start contributing!
-git checkout -b my-awesome-feature
-```
-
-
-
----
-
-<div align="center">
-Made with ❤️ for the SPL01 community and systems programming learners worldwide
-📚 Course: System Programming in Linux (SPL01) 
-⬆️ Back to Top
-
-</div># My_Unix_Ut 🐚
-
-A collection of Unix shell implementations and core system utilities written in C, demonstrating progressive shell development from basic to advanced features.
 
 ## 📋 Table of Contents
 
@@ -462,225 +356,6 @@ make test
 ./tests/benchmark.sh
 ```
 
-### Test Structure
-
-#### Shell Tests (`tests/test_shells.sh`)
-```bash
-#!/bin/bash
-# Comprehensive shell testing script
-
-test_femtoshell() {
-    echo "Testing Femtoshell..."
-    
-    # Test echo command
-    result=$(echo "echo hello world" | timeout 5 ./femtoshell | grep "hello world")
-    if [ -n "$result" ]; then
-        echo "✅ Echo test passed"
-    else
-        echo "❌ Echo test failed"
-        return 1
-    fi
-    
-    # Test exit command
-    echo "exit" | timeout 5 ./femtoshell > /dev/null
-    if [ $? -eq 0 ]; then
-        echo "✅ Exit test passed"
-    else
-        echo "❌ Exit test failed"
-        return 1
-    fi
-}
-
-test_variable_expansion() {
-    echo "Testing Variable Expansion..."
-    
-    # Create test environment
-    export TEST_VAR="hello_world"
-    
-    # Test nanoshell variable expansion
-    result=$(echo "echo \$TEST_VAR" | timeout 5 ./nanoshell | grep "hello_world")
-    if [ -n "$result" ]; then
-        echo "✅ Variable expansion test passed"
-    else
-        echo "❌ Variable expansion test failed"
-        return 1
-    fi
-}
-
-test_io_redirection() {
-    echo "Testing I/O Redirection..."
-    
-    # Create test files
-    echo "test input" > test_input.txt
-    
-    # Test input redirection
-    echo "cat < test_input.txt" | timeout 5 ./microshell > test_output.txt
-    if grep -q "test input" test_output.txt; then
-        echo "✅ Input redirection test passed"
-    else
-        echo "❌ Input redirection test failed"
-        return 1
-    fi
-    
-    # Test output redirection
-    echo "echo test output > redirect_test.txt" | timeout 5 ./microshell
-    if [ -f "redirect_test.txt" ] && grep -q "test output" redirect_test.txt; then
-        echo "✅ Output redirection test passed"
-    else
-        echo "❌ Output redirection test failed"
-        return 1
-    fi
-    
-    # Cleanup
-    rm -f test_input.txt test_output.txt redirect_test.txt
-}
-
-# Run all tests
-test_femtoshell
-test_variable_expansion
-test_io_redirection
-
-echo "🎉 All tests completed!"
-```
-
-#### Utility Tests (`tests/test_utilities.sh`)
-```bash
-#!/bin/bash
-# Test custom Unix utilities
-
-test_pwd() {
-    echo "Testing custom pwd..."
-    system_pwd=$(pwd)
-    custom_pwd=$(./mypwd)
-    
-    if [ "$system_pwd" = "$custom_pwd" ]; then
-        echo "✅ pwd test passed"
-    else
-        echo "❌ pwd test failed: expected '$system_pwd', got '$custom_pwd'"
-        return 1
-    fi
-}
-
-test_cat() {
-    echo "Testing custom cat..."
-    echo "Hello, World!" > test_cat.txt
-    
-    system_output=$(cat test_cat.txt)
-    custom_output=$(./mycat test_cat.txt)
-    
-    if [ "$system_output" = "$custom_output" ]; then
-        echo "✅ cat test passed"
-    else
-        echo "❌ cat test failed"
-        return 1
-    fi
-    
-    rm -f test_cat.txt
-}
-
-test_cp() {
-    echo "Testing custom cp..."
-    echo "test content" > source.txt
-    
-    ./mycp source.txt destination.txt
-    
-    if [ -f "destination.txt" ] && diff source.txt destination.txt > /dev/null; then
-        echo "✅ cp test passed"
-    else
-        echo "❌ cp test failed"
-        return 1
-    fi
-    
-    rm -f source.txt destination.txt
-}
-
-# Run utility tests
-test_pwd
-test_cat
-test_cp
-```
-
-### Interactive Testing
-
-#### Manual Test Cases
-
-**Test Case 1: Basic Functionality**
-```bash
-# Start microshell
-./microshell
-
-# Test sequence
-export HOME=/tmp
-cd $HOME
-pwd                    # Should show /tmp
-echo $HOME            # Should show /tmp
-TEST=value
-echo $TEST            # Should show value
-ls > files.txt        # Should create files.txt
-cat files.txt         # Should show directory contents
-exit
-```
-
-**Test Case 2: Error Handling**
-```bash
-./microshell
-
-# Test error conditions
-cd /nonexistent/path  # Should show error message
-cat < missing.txt     # Should show file not found
-invalid_command       # Should show command not found
-echo test 2> error.log # Should redirect stderr
-```
-
-**Test Case 3: Memory Leak Testing**
-```bash
-# Use valgrind to check for memory leaks
-valgrind --leak-check=full --show-leak-kinds=all ./microshell
-
-# Inside shell, run commands that allocate memory
-export TEST=value
-echo $TEST $HOME $USER
-exit
-```
-
-### Stress Tests (`tests/stress_test.sh`)
-```bash
-#!/bin/bash
-# Stress testing for shell implementations
-
-stress_test_commands() {
-    echo "Running stress test with 1000 commands..."
-    
-    for i in {1..1000}; do
-        echo "echo test $i"
-    done | timeout 30 ./microshell > /dev/null
-    
-    if [ $? -eq 0 ]; then
-        echo "✅ Stress test passed"
-    else
-        echo "❌ Stress test failed or timed out"
-        return 1
-    fi
-}
-
-stress_test_variables() {
-    echo "Testing variable expansion with large values..."
-    
-    # Create large environment variable
-    export LARGE_VAR=$(python3 -c "print('A' * 1000)")
-    
-    result=$(echo "echo \$LARGE_VAR" | timeout 10 ./nanoshell | wc -c)
-    if [ "$result" -gt 1000 ]; then
-        echo "✅ Large variable test passed"
-    else
-        echo "❌ Large variable test failed"
-        return 1
-    fi
-}
-
-stress_test_commands
-stress_test_variables
-```
 
 ## 🔧 Technical Details
 
@@ -758,15 +433,6 @@ valgrind --tool=massif --pages-as-heap=yes ./microshell
 valgrind --leak-check=full --show-leak-kinds=all ./microshell
 ```
 
-### Expected Results
-| Shell | Commands/sec | Memory Usage | Binary Size |
-|-------|-------------|--------------|-------------|
-| Femtoshell | ~5000 | 2MB | 8KB |
-| Picoshell | ~3000 | 4MB | 12KB |
-| Nanoshell | ~2000 | 6MB | 16KB |
-| Microshell | ~1500 | 8MB | 20KB |
-
-*Note: Performance varies based on system specifications*
 
 ## 🔧 Troubleshooting
 
@@ -837,40 +503,7 @@ valgrind --leak-check=full ./microshell
 # Fix by ensuring cleanup in error paths
 ```
 
-### Debugging Tips
 
-#### Enable Debug Mode
-```bash
-# Compile with debug symbols
-gcc -g -DDEBUG -o microshell-debug microshell.c
-
-# Use GDB for debugging
-gdb ./microshell-debug
-(gdb) run
-(gdb) set args
-(gdb) break main
-(gdb) continue
-```
-
-#### Add Debug Prints
-```c
-#ifdef DEBUG
-    printf("DEBUG: Parsing command: %s\n", nargv[0]);
-    printf("DEBUG: Variable expansion: %s -> %s\n", var, env_val);
-#endif
-```
-
-#### Common Debugging Commands
-```bash
-# Check system calls
-strace ./microshell
-
-# Monitor file operations
-lsof -p <shell_pid>
-
-# Check memory usage
-ps aux | grep shell
-top -p <shell_pid>
 ```
 
 ## 🎓 Educational Value
@@ -903,48 +536,8 @@ This project teaches essential systems programming concepts:
 - Advanced error handling and recovery
 - Resource management and cleanup
 
-### Academic Applications
 
-#### Operating Systems Course
-- **Process Creation**: Demonstrates fork/exec model
-- **I/O Systems**: Shows file descriptor manipulation
-- **Shell Implementation**: Complete working example
 
-#### Systems Programming Course
-- **Memory Management**: Dynamic allocation and cleanup
-- **Error Handling**: Comprehensive error reporting
-- **System Calls**: Practical usage of Unix APIs
-
-#### Software Engineering Course
-- **Progressive Development**: Shows iterative improvement
-- **Code Organization**: Clean, modular structure
-- **Testing**: Comprehensive test suite
-
-### Extended Learning Exercises
-
-#### **Exercise 1: Add New Features**
-```c
-// Add command history
-// Implement tab completion
-// Add alias support
-// Create custom prompt
-```
-
-#### **Exercise 2: Performance Optimization**
-```c
-// Reduce memory allocations
-// Optimize string operations
-// Implement command caching
-// Add async command execution
-```
-
-#### **Exercise 3: Advanced Shell Features**
-```c
-// Add pipe support: cmd1 | cmd2
-// Implement background processes: cmd &
-// Add job control: fg, bg, jobs
-// Create shell scripting support
-```
 
 ## 🏗️ Project Structure
 
@@ -962,23 +555,6 @@ My_Unix_Ut/
 ├── tests/                   # Comprehensive test suite
 │   ├── test_shells.sh       # Shell functionality tests
 │   ├── test_utilities.sh    # Utility command tests
-│   ├── benchmark.sh         # Performance benchmarking
-│   ├── stress_test.sh       # Stress and endurance tests
-│   ├── memory_test.sh       # Memory leak detection
-│   └── test_data/           # Sample files for testing
-│       ├── input.txt
-│       ├── sample_script.sh
-│       └── large_file.txt
-├── examples/                # Usage examples and tutorials
-│   ├── basic_usage.md       # Getting started guide
-│   ├── advanced_features.md # Advanced shell features
-│   ├── sample_sessions/     # Example shell sessions
-│   └── scripts/             # Example shell scripts
-├── docs/                    # Documentation
-│   ├── ARCHITECTURE.md      # Technical architecture
-│   ├── API_REFERENCE.md     # Function documentation
-│   ├── PERFORMANCE.md       # Performance analysis
-│   └── TROUBLESHOOTING.md   # Common issues and solutions
 ├── build/                   # Compiled binaries (gitignored)
 ├── Makefile                 # Build configuration with multiple targets
 ├── setup.sh                 # Automated setup script
@@ -987,9 +563,6 @@ My_Unix_Ut/
 └── README.md               # This comprehensive guide
 ```
 
-## 🤝 Contributing
-
-We welcome contributions! Here's how you can help improve My_Unix_Ut:
 
 ### 🚀 Quick Start for Contributors
 
@@ -1013,14 +586,7 @@ chmod +x setup.sh
 make test
 ```
 
-### 📋 Contribution Areas
 
-#### **🐚 Shell Enhancements**
-- **Add Pipe Support**: Implement `cmd1 | cmd2` functionality
-- **Background Processes**: Add `command &` support
-- **Command History**: Arrow key navigation through history
-- **Tab Completion**: Auto-completion for files and commands
-- **Job Control**: Implement `fg`, `bg`, `jobs` commands
 
 #### **🛠️ Utility Improvements**
 - **Enhanced `cp`**: Add recursive copying with `-r` flag
@@ -1028,17 +594,8 @@ make test
 - **Extended `cat`**: Add line numbering (`-n` flag)
 - **New Utilities**: Implement `ls`, `grep`, `find`, `wc`
 
-#### **🧪 Testing & Quality**
-- **Unit Tests**: Add more granular test coverage
-- **Integration Tests**: End-to-end testing scenarios
-- **Performance Tests**: Benchmarking and optimization
-- **Security Tests**: Buffer overflow and injection testing
 
-#### **📚 Documentation**
-- **Code Comments**: Improve inline documentation
-- **Tutorials**: Step-by-step implementation guides
-- **Architecture Docs**: Technical deep-dive documentation
-- **Video Tutorials**: Screen recordings of features
+
 
 ### 🎯 Development Guidelines
 
