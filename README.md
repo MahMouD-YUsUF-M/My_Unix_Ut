@@ -540,8 +540,7 @@ This project teaches essential systems programming concepts:
 
 
 ## 🏗️ Project Structure
-
-```
+```bash
 My_Unix_Ut/
 ├── src/                      # Source files
 │   ├── femtoshell.c         # Minimal shell (echo, exit)
@@ -595,55 +594,6 @@ make test
 - **New Utilities**: Implement `ls`, `grep`, `find`, `wc`
 
 
-
-
-### 🎯 Development Guidelines
-
-#### **Code Style**
-```c
-// Use consistent indentation (4 spaces)
-int main(int argc, char *argv[]) {
-    char *buffer = NULL;
-    size_t buffer_size = 0;
-    
-    // Use descriptive variable names
-    ssize_t bytes_read = getline(&buffer, &buffer_size, stdin);
-    
-    // Add error checking for all system calls
-    if (bytes_read == -1) {
-        perror("getline failed");
-        return 1;
-    }
-    
-    // Clean up resources
-    free(buffer);
-    return 0;
-}
-```
-
-#### **Testing Requirements**
-```bash
-# All new features must include tests
-./tests/test_new_feature.sh
-
-# Memory leak testing is mandatory
-valgrind --leak-check=full ./your_shell
-
-# Performance regression testing
-./tests/benchmark.sh
-```
-
-#### **Commit Message Format**
-```
-feat: add pipe support to microshell
-
-- Implement basic pipe parsing
-- Add pipe execution with fork/exec
-- Include comprehensive tests
-- Update documentation
-
-Closes #123
-```
 
 
 
